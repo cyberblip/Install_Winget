@@ -1,4 +1,7 @@
-﻿# Cleanup: Remove any resources from previous executions
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force
+Install-Module PowerShellGet -Force -SkipPublisherCheck
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+# Cleanup: Remove any resources from previous executions
 if (Test-Path "Microsoft.VCLibs.x64.14.00.Desktop.appx") {
     Remove-Item -Path "Microsoft.VCLibs.x64.14.00.Desktop.appx" -Force
 }
@@ -56,7 +59,7 @@ if (Get-Command winget -ErrorAction SilentlyContinue) {
     Write-Output "Winget installation failed!"
 }
 
-# Post-Execution Cleanup: Remove downloaded and extracted files
+#Post-Execution Cleanup: Remove downloaded and extracted files
 Remove-Item -Path "Microsoft.VCLibs.x64.14.00.Desktop.appx" -Force
 Remove-Item -Path "Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle" -Force
 Remove-Item -Path "microsoft.ui.xaml.2.7.3.zip" -Force
